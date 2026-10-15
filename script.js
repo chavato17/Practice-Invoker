@@ -62,6 +62,8 @@ let spellpics = [
 
 startpracticeButton.addEventListener('click', () => {
 
+    startpracticeButton.classList.add("remove-startprac");
+
     if (timerRef === null) {
         timerRef = setInterval(stopwatchLogic, 10);
     }
