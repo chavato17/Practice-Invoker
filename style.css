@@ -12,9 +12,9 @@ body{
 }
 
 #restart-btn{
-    display: none;
+    display: none !important;
 }
 
 .restart-show{
-    display: flex;
+    display: flex !important;
 }
