@@ -1,6 +1,5 @@
 let startpracticeButton = document.getElementById('start-practice');
-
-
+let restartbtn = document.getElementById("restart-btn");
 
 const clockDisplay = document.getElementById('clock-display');
 
@@ -63,6 +62,7 @@ let spellpics = [
 startpracticeButton.addEventListener('click', () => {
 
     startpracticeButton.classList.add("remove-startprac");
+    restartbtn.classList.add("restart-show");
 
     if (timerRef === null) {
         timerRef = setInterval(stopwatchLogic, 10);

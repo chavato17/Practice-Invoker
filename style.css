@@ -10,3 +10,11 @@ body{
 .remove-startprac{
     display: none;
 }
+
+#restart-btn{
+    display: none;
+}
+
+.restart-show{
+    display: flex;
+}
