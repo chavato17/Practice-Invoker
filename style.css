@@ -16,5 +16,5 @@ body{
 }
 
 .restart-show{
-    display: flex !important;
+    display: block !important;
 }
