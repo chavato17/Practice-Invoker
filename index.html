@@ -12,14 +12,16 @@
 
     <hero>
         <div class="hero-left">
-            <h2>Keybinds</h2>
-            <div class="keybindskills"><div><img src="orbs/quas.jpg" alt=""><p>Quas</p></div><button class = "key quasbtn">Q</button></div>
-            <div class="keybindskills"><div><img src="orbs/wex.jpg" alt=""><p>Wex</p></div><button class = "key wexbtn">W</button></div>
-            <div class="keybindskills"><div><img src="orbs/exort.jpg" alt=""><p>Exort</p></div><button class = "key exortbtn">E</button></div>
-            <div class="keybindskills"><div><img src="orbs/invoke.webp" alt=""><p>Invoke</p></div><button class = "key invokebtn">R</button></div>
+            <h2>Controls</h2>
+            <div class="keybindskills"><div><img src="orbs/quas.jpg" alt=""><p>Quas</p></div><button class = "key quasbtn" id="quaskeybtn"></button></div>
+            <div class="keybindskills"><div><img src="orbs/wex.jpg" alt=""><p>Wex</p></div><button class = "key wexbtn" id="wexkeybtn"></button></div>
+            <div class="keybindskills"><div><img src="orbs/exort.jpg" alt=""><p>Exort</p></div><button class = "key exortbtn" id="exortkeybtn"></button></div>
+            <div class="keybindskills"><div><img src="orbs/invoke.webp" alt=""><p>Invoke</p></div><button class = "key invokebtn" id="invokekeybtn"></button></div>
             <button id="reset-keybinds">Reset Keybinds</button>
         </div>
         <div class="hero-center">
+            <button id="start-practice">Start Practice</button>
+            <button id="restart-btn" class="restart-hide">Restart</button>
             <span id="clock-display" class="clock-hide"></span>
             <div>
                 <img id="Orb1" src="spells/no-spell.webp" alt="">
@@ -30,12 +32,18 @@
                 <img id="spell1" src="spells/no-spell.webp" alt="">
                 <img id="spell2" src="spells/no-spell.webp" alt="">
             </div>
-            <button id="start-practice">Start Practice</button>
-            <button id="restart-btn" class="restart-hide">Restart</button>
         </div>
         <div class="hero-right">
 
         </div>
     </hero>
+
+    <div class="modal" id="modal">
+        <div class="modal-content" id="modal-content">
+            <h2>Press a Key to bind</h2>
+            <img src="" alt="" id="modal-img">
+            <span id="modalspell"></span>
+        </div>
+    </div>
 </body>
 </html>

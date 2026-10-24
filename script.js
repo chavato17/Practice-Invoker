@@ -1,8 +1,6 @@
 let startpracticeButton = document.getElementById('start-practice');
 let restartbtn = document.getElementById("restart-btn");
-
 const clockDisplay = document.getElementById('clock-display');
-
 
 let ms = 0, seconds = 0, minutes = 0, hours = 0;
 let timerRef = null;
@@ -39,6 +37,29 @@ let orb3 = document.getElementById('Orb3');
 let spell1 = document.getElementById('spell1');
 let spell2 = document.getElementById('spell2');
 
+let quaskeybtn = document.getElementById('quaskeybtn');
+let wexkeybtn = document.getElementById('wexkeybtn');
+let exortkeybtn = document.getElementById('exortkeybtn');
+let invokekeybtn = document.getElementById('invokekeybtn');
+let resetkeybinds = document.getElementById('reset-keybinds');
+
+let selectedKeybind = null;
+let quaskeybind = 'Q';
+let wexkeybind = 'W';
+let exortkeybind = 'E';
+let invokekeybind = 'R';
+
+quaskeybtn.textContent = quaskeybind;
+wexkeybtn.textContent = wexkeybind;
+exortkeybtn.textContent = exortkeybind;
+invokekeybtn.textContent = invokekeybind;
+
+let modal = document.getElementById('modal');
+let modalcontent = document.getElementById('modal-content');
+let modalspell = document.getElementById('modalspell');
+let modalimg = document.getElementById('modal-img');
+
+
 //***** DATA STRUCTURING ******//
 
 let spells = [];
@@ -63,6 +84,7 @@ let orbs = [];
     let chaosmeteor = 'spells/chaos-meteor.webp';
     let deafeningblast = 'spells/deafening-blast.webp';
 
+
 startpracticeButton.addEventListener('click', () => {
     isRunning = true;
     clockDisplay.classList.remove("clock-hide");
@@ -79,12 +101,14 @@ startpracticeButton.addEventListener('click', () => {
 
 document.addEventListener('keydown', (event) => {
 
-        if(!isRunning) {return;}
+        if (!isRunning || modal.classList.contains('modal-show')) {
+            return;
+        }
 
-        let key = event.key.toLowerCase();
+        let key = event.key.toUpperCase();
 
-        // Q, W, E = add orb
-        if (key === 'q' || key === 'w' || key === 'e') {
+        // Quas, Wex, Exort = add orb
+        if (key === quaskeybind || key === wexkeybind || key === exortkeybind) {
 
             if (orbs.length >= 3) {
                 orbs.shift();
@@ -92,58 +116,60 @@ document.addEventListener('keydown', (event) => {
 
             orbs.push(key);
 
-            console.log(orbs);
-
             // Update orb images
-            if (orbs[0] === 'q') orb1.src = quas;
-            if (orbs[0] === 'w') orb1.src = wex;
-            if (orbs[0] === 'e') orb1.src = exort;
+            if (orbs[0] === quaskeybind) orb1.src = quas;
+            if (orbs[0] === wexkeybind) orb1.src = wex;
+            if (orbs[0] === exortkeybind) orb1.src = exort;
 
-            if (orbs[1] === 'q') orb2.src = quas;
-            if (orbs[1] === 'w') orb2.src = wex;
-            if (orbs[1] === 'e') orb2.src = exort;
+            if (orbs[1] === quaskeybind) orb2.src = quas;
+            if (orbs[1] === wexkeybind) orb2.src = wex;
+            if (orbs[1] === exortkeybind) orb2.src = exort;
 
-            if (orbs[2] === 'q') orb3.src = quas;
-            if (orbs[2] === 'w') orb3.src = wex;
-            if (orbs[2] === 'e') orb3.src = exort;
+            if (orbs[2] === quaskeybind) orb3.src = quas;
+            if (orbs[2] === wexkeybind) orb3.src = wex;
+            if (orbs[2] === exortkeybind) orb3.src = exort;
         }
 
         
-        // R = Invoke
+        //Invoke
         let combovalue = 0;
         
-        if (key === 'r' && orbs.length === 3) {
+        if (key === invokekeybind && orbs.length === 3) {
 
-            let combo = [...orbs].sort().join('');
+            let combo = orbs.map(orb => {
+                if (orb === quaskeybind) return 'Q';
+                if (orb === wexkeybind) return 'W';
+                if (orb === exortkeybind) return 'E';
+            }).sort().join('');
             
-            if (combo === 'qqq') {
+            if (combo === 'QQQ') {
                 combovalue = coldsnap; // Cold Snap
             }
-            else if (combo === 'qqw' || combo === 'wqq' || combo === 'qwq') {
+            else if (combo === 'QQW' || combo === 'WQQ' || combo === 'QWQ') {
                 combovalue = ghostwalk; // Ghost Walk
             }
-            else if (combo === 'qqe' || combo === 'eqq' || combo === 'qeq') {
+            else if (combo === 'QQE' || combo === 'EQQ' || combo === 'QEQ') {
                 combovalue = icewall; // Ice Wall
             }
-            else if (combo === 'www') {
+            else if (combo === 'WWW') {
                 combovalue = emp; // EMP
             }
-            else if (combo === 'qww' || combo === 'wwq' || combo === 'wqw') {
+            else if (combo === 'QWW' || combo === 'WWQ' || combo === 'WQW') {
                 combovalue = tornado; // Tornado
             }
-            else if (combo === 'wwe' || combo === 'eww' || combo === 'wew') {
+            else if (combo === 'WWE' || combo === 'EWW' || combo === 'WEW') {
                 combovalue = alacrity; // Alacrity
             }
-            else if (combo === 'eee') {
+            else if (combo === 'EEE') {
                 combovalue = sunstrike; // Sun Strike
             }
-            else if (combo === 'qee' || combo === 'eqe' || combo === 'eeq') {
+            else if (combo === 'QEE' || combo === 'EQE' || combo === 'EEQ') {
                 combovalue = forgespirit; // Forge Spirit
             }
-            else if (combo === 'eew' || combo === 'ewe' || combo === 'wee') {
+            else if (combo === 'EEW' || combo === 'EWE' || combo === 'WEE') {
                 combovalue = chaosmeteor; // Chaos Meteor
             }
-            else if (combo === 'eqw' || combo === 'wqe' || combo === 'qew') {
+            else if (combo === 'EQW' || combo === 'WQE' || combo === 'QEW') {
                 combovalue = deafeningblast; // Deafening Blast
             }
 
@@ -160,6 +186,95 @@ document.addEventListener('keydown', (event) => {
         }   
 
 });
+
+quaskeybtn.addEventListener('click', () => {
+    modal.classList.add('modal-show');
+
+    modalspell.textContent = "Quas";
+    modalspell.style.color = "#1f8fff";
+    modalimg.src = quas;
+
+    selectedKeybind = "quas";
+});
+
+wexkeybtn.addEventListener('click', () => {
+    modal.classList.add('modal-show');
+
+    modalspell.textContent = "Wex";
+    modalspell.style.color = "#c05cff";
+    modalimg.src = wex;
+
+    selectedKeybind = "wex";
+});
+
+exortkeybtn.addEventListener('click', () => {
+    modal.classList.add('modal-show');
+
+    modalspell.textContent = "Exort";
+    modalspell.style.color = "#f19345";
+    modalimg.src = exort;
+
+    selectedKeybind = "exort";
+});
+
+invokekeybtn.addEventListener('click', () => {
+    modal.classList.add('modal-show');
+
+    modalspell.textContent = "Invoke";
+    modalspell.style.color = "#f1e645";
+    modalimg.src = 'orbs/invoke.webp';
+
+    selectedKeybind = "invoke";
+});
+
+resetkeybinds.addEventListener('click', () =>{
+    quaskeybind = "Q";
+    wexkeybind = "W";
+    exortkeybind = "E";
+    invokekeybind = "R";
+
+    quaskeybtn.textContent = quaskeybind;
+    wexkeybtn.textContent = wexkeybind;
+    exortkeybtn.textContent = exortkeybind;
+    invokekeybtn.textContent = invokekeybind;
+});
+
+document.addEventListener('keydown', (event) => {
+
+    if (!modal.classList.contains('modal-show')) {
+        return;
+    }
+
+    let newKey = event.key.toUpperCase();
+
+    if (selectedKeybind === "quas") {
+        quaskeybind = newKey;
+        quaskeybtn.textContent = newKey;
+    }
+
+    if (selectedKeybind === "wex") {
+        wexkeybind = newKey;
+        wexkeybtn.textContent = newKey;
+    }
+
+    if (selectedKeybind === "exort") {
+        exortkeybind = newKey;
+        exortkeybtn.textContent = newKey;
+    }
+
+    if (selectedKeybind === "invoke") {
+        invokekeybind = newKey;
+        invokekeybtn.textContent = newKey;
+    }
+
+    closeModal();
+});
+
+function closeModal() {
+    modal.classList.remove('modal-show');
+}
+
+
 
 
 restartbtn.addEventListener('click', () => {
