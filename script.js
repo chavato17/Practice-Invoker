@@ -43,6 +43,7 @@ let exortkeybtn = document.getElementById('exortkeybtn');
 let invokekeybtn = document.getElementById('invokekeybtn');
 let resetkeybinds = document.getElementById('reset-keybinds');
 
+
 let selectedKeybind = null;
 let quaskeybind = 'Q';
 let wexkeybind = 'W';
@@ -65,6 +66,34 @@ function updateKeyButton(button, key) {
         button.style.fontSize = "14px";
     }
 }
+
+let spellSpans = {
+    coldsnap: document.getElementById('coldsnap-span'),
+    ghostwalk: document.getElementById('ghostwalk-span'),
+    icewall: document.getElementById('icewall-span'),
+    emp: document.getElementById('emp-span'),
+    tornado: document.getElementById('tornado-span'),
+    alacrity: document.getElementById('alacrity-span'),
+    sunstrike: document.getElementById('sunstrike-span'),
+    forgespirit: document.getElementById('forgespirit-span'),
+    chaosmeteor: document.getElementById('chaosmeteor-span'),
+    deafeningblast: document.getElementById('deafeningblast-span')
+};
+
+function updateSpellKeybinds() {
+    spellSpans.coldsnap.textContent = `${quaskeybind}${quaskeybind}${quaskeybind}`;
+    spellSpans.ghostwalk.textContent = `${quaskeybind}${quaskeybind}${wexkeybind}`;
+    spellSpans.icewall.textContent = `${quaskeybind}${quaskeybind}${exortkeybind}`;
+    spellSpans.emp.textContent = `${wexkeybind}${wexkeybind}${wexkeybind}`;
+    spellSpans.tornado.textContent = `${wexkeybind}${wexkeybind}${quaskeybind}`;
+    spellSpans.alacrity.textContent = `${wexkeybind}${wexkeybind}${exortkeybind}`;
+    spellSpans.sunstrike.textContent = `${exortkeybind}${exortkeybind}${exortkeybind}`;
+    spellSpans.forgespirit.textContent = `${exortkeybind}${exortkeybind}${quaskeybind}`;
+    spellSpans.chaosmeteor.textContent = `${exortkeybind}${exortkeybind}${wexkeybind}`;
+    spellSpans.deafeningblast.textContent = `${quaskeybind}${wexkeybind}${exortkeybind}`;
+}
+
+updateSpellKeybinds();
 
 
 let modal = document.getElementById('modal');
@@ -250,6 +279,7 @@ resetkeybinds.addEventListener('click', () =>{
     updateKeyButton(wexkeybtn, wexkeybind);
     updateKeyButton(exortkeybtn, exortkeybind);
     updateKeyButton(invokekeybtn, invokekeybind);
+    updateSpellKeybinds();
 });
 
 document.addEventListener('keydown', (event) => {
@@ -263,21 +293,25 @@ document.addEventListener('keydown', (event) => {
     if (selectedKeybind === "quas") {
         quaskeybind = newKey;
         updateKeyButton(quaskeybtn, newKey);
+        updateSpellKeybinds();
     }
 
     if (selectedKeybind === "wex") {
         wexkeybind = newKey;
         updateKeyButton(wexkeybtn, newKey);
+        updateSpellKeybinds();
     }
 
     if (selectedKeybind === "exort") {
         exortkeybind = newKey;
         updateKeyButton(exortkeybtn, newKey);
+        updateSpellKeybinds();
     }
 
     if (selectedKeybind === "invoke") {
         invokekeybind = newKey;
         updateKeyButton(invokekeybtn, newKey);
+        updateSpellKeybinds();
     }
 
     closeModal();
