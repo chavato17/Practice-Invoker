@@ -13,16 +13,18 @@
     <hero>
         <div class="hero-left">
             <h2>Controls</h2>
-            <div class="keybindskills"><div><img src="orbs/quas.jpg" alt=""><p>Quas</p></div><button class = "key quasbtn" id="quaskeybtn"></button></div>
-            <div class="keybindskills"><div><img src="orbs/wex.jpg" alt=""><p>Wex</p></div><button class = "key wexbtn" id="wexkeybtn"></button></div>
-            <div class="keybindskills"><div><img src="orbs/exort.jpg" alt=""><p>Exort</p></div><button class = "key exortbtn" id="exortkeybtn"></button></div>
-            <div class="keybindskills"><div><img src="orbs/invoke.webp" alt=""><p>Invoke</p></div><button class = "key invokebtn" id="invokekeybtn"></button></div>
+            <div class="left-keybinds">
+                <div class="keybindskills"><div><img src="orbs/quas.jpg" alt=""><p>Quas</p></div><button class = "key quasbtn" id="quaskeybtn"></button></div>
+                <div class="keybindskills"><div><img src="orbs/wex.jpg" alt=""><p>Wex</p></div><button class = "key wexbtn" id="wexkeybtn"></button></div>
+                <div class="keybindskills"><div><img src="orbs/exort.jpg" alt=""><p>Exort</p></div><button class = "key exortbtn" id="exortkeybtn"></button></div>
+                <div class="keybindskills"><div><img src="orbs/invoke.webp" alt=""><p>Invoke</p></div><button class = "key invokebtn" id="invokekeybtn"></button></div>
+            </div>
             <button id="reset-keybinds">Reset Keybinds</button>
         </div>
         <div class="hero-center">
+            <span id="clock-display" class="clock-hide"></span>
             <button id="start-practice">Start Practice</button>
             <button id="restart-btn" class="restart-hide">Restart</button>
-            <span id="clock-display" class="clock-hide"></span>
             <div>
                 <img id="Orb1" src="spells/no-spell.webp" alt="">
                 <img id="Orb2" src="spells/no-spell.webp" alt="">
@@ -34,9 +36,22 @@
             </div>
         </div>
         <div class="hero-right">
-
+            <h2>SPELLS</h2>
+            <div class="right-spells-container">
+                <div class="spells-right"><img src="spells/cold-snap.webp" alt=""><div><p>Cold Snap</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/ghost-walk.webp" alt=""><div><p>Ghost Walk</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/ice-wall.webp" alt=""><div><p>Ice Wall</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/emp.webp" alt=""><div><p>EMP</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/tornado.webp" alt=""><div><p>Tornado</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/alacrity.webp" alt=""><div><p>Alacrity</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/sun-strike.webp" alt=""><div><p>Sunstrike</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/forge-spirit.webp" alt=""><div><p>Forge Spirit</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/chaos-meteor.webp" alt=""><div><p>Chaos Meteor</p><span></span></div></div>
+                <div class="spells-right"><img src="spells/deafening-blast.webp" alt=""><div><p>Deafening Blast</p><span></span></div></div>
+            </div>
         </div>
     </hero>
+
 
     <div class="modal" id="modal">
         <div class="modal-content" id="modal-content">

@@ -49,10 +49,23 @@ let wexkeybind = 'W';
 let exortkeybind = 'E';
 let invokekeybind = 'R';
 
-quaskeybtn.textContent = quaskeybind;
-wexkeybtn.textContent = wexkeybind;
-exortkeybtn.textContent = exortkeybind;
-invokekeybtn.textContent = invokekeybind;
+updateKeyButton(quaskeybtn, quaskeybind);
+updateKeyButton(wexkeybtn, wexkeybind);
+updateKeyButton(exortkeybtn, exortkeybind);
+updateKeyButton(invokekeybtn, invokekeybind);
+
+
+function updateKeyButton(button, key) {
+    button.textContent = key;
+
+    if (key.length >= 4) {
+        button.style.fontSize = "10px";
+    } 
+    else {
+        button.style.fontSize = "14px";
+    }
+}
+
 
 let modal = document.getElementById('modal');
 let modalcontent = document.getElementById('modal-content');
@@ -233,10 +246,10 @@ resetkeybinds.addEventListener('click', () =>{
     exortkeybind = "E";
     invokekeybind = "R";
 
-    quaskeybtn.textContent = quaskeybind;
-    wexkeybtn.textContent = wexkeybind;
-    exortkeybtn.textContent = exortkeybind;
-    invokekeybtn.textContent = invokekeybind;
+    updateKeyButton(quaskeybtn, quaskeybind);
+    updateKeyButton(wexkeybtn, wexkeybind);
+    updateKeyButton(exortkeybtn, exortkeybind);
+    updateKeyButton(invokekeybtn, invokekeybind);
 });
 
 document.addEventListener('keydown', (event) => {
@@ -249,22 +262,22 @@ document.addEventListener('keydown', (event) => {
 
     if (selectedKeybind === "quas") {
         quaskeybind = newKey;
-        quaskeybtn.textContent = newKey;
+        updateKeyButton(quaskeybtn, newKey);
     }
 
     if (selectedKeybind === "wex") {
         wexkeybind = newKey;
-        wexkeybtn.textContent = newKey;
+        updateKeyButton(wexkeybtn, newKey);
     }
 
     if (selectedKeybind === "exort") {
         exortkeybind = newKey;
-        exortkeybtn.textContent = newKey;
+        updateKeyButton(exortkeybtn, newKey);
     }
 
     if (selectedKeybind === "invoke") {
         invokekeybind = newKey;
-        invokekeybtn.textContent = newKey;
+        updateKeyButton(invokekeybtn, newKey);
     }
 
     closeModal();
