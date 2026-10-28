@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 *{
     box-sizing: border-box;
+}
+
+:root{
+    --cinzel: 'Cinzel', serif;
+    --inter: "Inter", sans-serif;
 }
 
 body{
@@ -34,9 +40,9 @@ body{
 hero{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 100dvh;
-    gap: 60px;
+    gap: 24px;
 }
 
 .key {
@@ -121,6 +127,7 @@ hero{
 .hero-left{
     min-width: 260px;
     min-height: 610px;
+    margin-left: 24px;
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -140,6 +147,10 @@ hero{
     justify-self: flex-start;
     flex-direction: column;
     gap: 20px;
+}
+
+.left-keybinds p{
+    font-family: 'Cinzel', serif;
 }
 
 .hero-left img{
@@ -170,9 +181,9 @@ hero{
     border: 2px solid #000;
 }
 
-#spell1, #spell2{
+#spell1, #spell2, .skills-down{
     width: 64px;
-    border: 2px solid #000;
+    border: 2px solid rgba(160, 175, 195, 0.10);
 }
 
 .hero-center{
@@ -181,6 +192,19 @@ hero{
     align-items: center;
     justify-content: center;
     gap: 20px;
+    min-height: 610px;
+    min-width: 410px;
+    max-width: 540px;
+    width: 100%;
+}
+
+#clock-display{
+    display: block;
+    width: 220px;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
 }
 
 #start-practice{
@@ -287,6 +311,7 @@ hero{
 .hero-right{
     min-width: 260px;
     min-height: 610px;
+    margin-right: 24px;
     padding: 24px;
     display: flex;
     flex-direction: column;

@@ -7,14 +7,16 @@ let timerRef = null;
 let isRunning = false;
 
 function stopwatchLogic() {
-    ms++; // Increment milliseconds
+    ms++;
 
     if (ms >= 100) {
-            ms = 0;
-            seconds++;
+        ms = 0;
+        seconds++;
+
         if (seconds === 60) {
-                seconds = 0;
-                minutes++;
+            seconds = 0;
+            minutes++;
+
             if (minutes === 60) {
                 minutes = 0;
                 hours++;
@@ -22,13 +24,22 @@ function stopwatchLogic() {
         }
     }
 
-    // Pad numbers to ensure double digits
-    let h = hours < 10 ? "0" + hours : hours;
-    let m = minutes < 10 ? "0" + minutes : minutes;
-    let s = seconds < 10 ? "0" + seconds : seconds;
-    let pMs = ms < 10 ? "0" + ms : ms;
+    let pMs = ms < 10 ? `0${ms}` : ms;
 
-    clockDisplay.textContent = `${h}:${m}:${s}.${pMs}`;
+    if (hours > 0) {
+        let m = minutes < 10 ? `0${minutes}` : minutes;
+        let s = seconds < 10 ? `0${seconds}` : seconds;
+
+        clockDisplay.textContent = `${hours}:${m}:${s}.${pMs}`;
+    }
+    else if (minutes > 0) {
+        let s = seconds < 10 ? `0${seconds}` : seconds;
+
+        clockDisplay.textContent = `${minutes}:${s}.${pMs}`;
+    }
+    else {
+        clockDisplay.textContent = `${seconds}.${pMs}`;
+    }
 }
 
 let orb1 = document.getElementById('Orb1');
