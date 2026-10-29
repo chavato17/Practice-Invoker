@@ -48,12 +48,20 @@ let orb3 = document.getElementById('Orb3');
 let spell1 = document.getElementById('spell1');
 let spell2 = document.getElementById('spell2');
 
+let modespell = document.getElementById('mode-spell');
+
 let quaskeybtn = document.getElementById('quaskeybtn');
 let wexkeybtn = document.getElementById('wexkeybtn');
 let exortkeybtn = document.getElementById('exortkeybtn');
 let invokekeybtn = document.getElementById('invokekeybtn');
 let resetkeybinds = document.getElementById('reset-keybinds');
 
+let orbcontainer = document.getElementById('orb-container');
+let invokerspellscontainer = document.getElementById('invoker-spells');
+
+let spellCount = document.getElementById("spell-count");
+let spellCountDisplay = document.getElementById("spell-countdisplay");
+let spellDescription = document.getElementById("spell-description");
 
 let selectedKeybind = null;
 let quaskeybind = 'Q';
@@ -126,6 +134,7 @@ let orbs = [];
 
     let nospell = 'spells/no-spell.webp';
 
+    let noorb = 'orbs/no-orb.webp'
     let coldsnap = 'spells/cold-snap.webp';
     let ghostwalk = 'spells/ghost-walk.webp';
     let icewall = 'spells/ice-wall.webp';
@@ -140,8 +149,12 @@ let orbs = [];
 
 startpracticeButton.addEventListener('click', () => {
     isRunning = true;
+    
+    classicmode();
     clockDisplay.classList.remove("clock-hide");
     clockDisplay.classList.add("clock-show");
+    spellCountDisplay.classList.remove("spell-count-hide")
+    spellDescription.classList.remove("spell-description-hide")
 
     startpracticeButton.classList.add("remove-startprac");
     restartbtn.classList.remove("restart-hide");
@@ -236,6 +249,7 @@ document.addEventListener('keydown', (event) => {
 
             spell1.src = spells[0] || nospell;
             spell2.src = spells[1] || nospell;
+            classicCheckSpell(combovalue);
         }   
 
 });
@@ -333,7 +347,7 @@ function closeModal() {
 }
 
 
-
+//**************************************** RESTART BTN ****************************************//
 
 restartbtn.addEventListener('click', () => {
 
@@ -341,6 +355,7 @@ restartbtn.addEventListener('click', () => {
     restartbtn.classList.remove("restart-show");
     restartbtn.classList.add("restart-hide");
     startpracticeButton.classList.remove("remove-startprac");
+    modespell.src = "";
 
     startpracticeButton.removeEventListener('click', () => {})
 
@@ -348,6 +363,10 @@ restartbtn.addEventListener('click', () => {
 
     clockDisplay.classList.remove("clock-show");
     clockDisplay.classList.add("clock-hide");
+    spellCountDisplay.classList.add("spell-count-hide")
+    spellDescription.classList.add("spell-description-hide")
+    orbcontainer.classList.remove("orb-container-hide")
+    invokerspellscontainer.classList.remove("invoker-spells-hide")
 
     clearInterval(timerRef);
     timerRef = null;
@@ -361,13 +380,131 @@ restartbtn.addEventListener('click', () => {
     orbs = [];
 
     // Reset orb images
-    orb1.src = nospell;
-    orb2.src = nospell;
-    orb3.src = nospell;
+    orb1.src = noorb;
+    orb2.src = noorb;
+    orb3.src = noorb;
 
     // Reset spell image
     spell1.src = nospell;
     spell2.src = nospell; 
     
+    modespell.classList.add("mode-spell-hide");
+    
     spells = [];
 });
+
+//******** MODES *********//
+
+// CLASSIC MODE
+let classicSpells = [
+    coldsnap,
+    ghostwalk,
+    icewall,
+    emp,
+    tornado,
+    alacrity,
+    sunstrike,
+    forgespirit,
+    chaosmeteor,
+    deafeningblast
+];
+
+let classicIndex = 0;
+let classicCurrentSpell = null;
+
+
+function classicmode() {
+
+    classicModeActive = true;
+
+    // Reset timer
+    ms = 0;
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+
+    clockDisplay.textContent = "0.00";
+
+    // Start timer
+    if (timerRef === null) {
+        timerRef = setInterval(stopwatchLogic, 10);
+    }
+
+    // Randomize spells
+    classicSpells = [
+        coldsnap,
+        ghostwalk,
+        icewall,
+        emp,
+        tornado,
+        alacrity,
+        sunstrike,
+        forgespirit,
+        chaosmeteor,
+        deafeningblast
+    ];
+
+    classicSpells.sort(() => Math.random() - 0.5);
+
+    classicIndex = 0;
+
+    classicNextSpell();
+}
+
+
+function classicNextSpell() {
+
+    if (classicIndex >= classicSpells.length) {
+        classicFinished();
+        return;
+    }
+
+    classicCurrentSpell = classicSpells[classicIndex];
+
+    modespell.classList.remove("mode-spell-hide");
+    modespell.src = classicCurrentSpell;
+    spellCount.textContent = classicIndex + 1;
+}
+
+
+function classicCheckSpell(invokedSpell) {
+
+    if (!classicModeActive) {
+        return;
+    }
+
+    if (invokedSpell === classicCurrentSpell) {
+
+        classicIndex++;
+
+        classicNextSpell();
+    }
+}
+
+
+function classicFinished() {
+
+    // Stop Classic Mode
+    classicModeActive = false;
+
+    // Stop timer
+    clearInterval(timerRef);
+    timerRef = null;
+
+    orb1.src = noorb;
+    orb2.src = noorb;
+    orb3.src = noorb;
+
+    spell1.src = nospell
+    spell2.src = nospell
+
+    // Remove current spell
+    classicCurrentSpell = null;
+    modespell.src = "";
+    modespell.classList.add('mode-spell-hide')
+    spellCountDisplay.classList.add("spell-count-hide")
+    spellDescription.classList.add("spell-description-hide")
+    
+    orbcontainer.classList.add("orb-container-hide")
+    invokerspellscontainer.classList.add("invoker-spells-hide")
+}
