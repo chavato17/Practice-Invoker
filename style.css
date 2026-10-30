@@ -345,6 +345,35 @@ hero{
     display: block !important;
 }
 
+#practice-again{
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 240px;
+    height: 50px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 40, 10, .6);
+    border: 1px solid #2a6a35;
+    border-radius: 1px;
+    /* muted green gradient */
+    background: linear-gradient(180deg, #3f8a4b, #2f6e3b);
+    box-shadow:
+    inset 0 0 0 1px rgba(150, 225, 160, .45),
+    inset 0 1px 0 rgba(255, 255, 255, .25),
+    0 0 10px 1px rgba(70, 130, 220, .35),
+    0 0 28px 4px rgba(50, 100, 200, .22);
+    transition: background .15s ease;
+}
+
+.practice-again-hide{display: none !important;}
+.practice-again-show{display: block !important;}
+
 .hero-right{
     min-width: 260px;
     min-height: 610px;

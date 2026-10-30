@@ -1,5 +1,6 @@
 let startpracticeButton = document.getElementById('start-practice');
 let restartbtn = document.getElementById("restart-btn");
+let practiceAgainBtn = document.getElementById("practice-again");
 const clockDisplay = document.getElementById('clock-display');
 
 let ms = 0, seconds = 0, minutes = 0, hours = 0;
@@ -159,6 +160,7 @@ document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
 
         if (classicModeFinished) {
+            practiceAgainBtn.click();
             return;
         }
 
@@ -169,7 +171,6 @@ document.addEventListener("keydown", (event) => {
             restartbtn.click();
         }
     }
-
 });
 
 //**************************************** START BTN ****************************************//
@@ -191,6 +192,34 @@ startpracticeButton.addEventListener('click', () => {
         timerRef = setInterval(stopwatchLogic, 10);
     }
 });
+
+//************************************* PRACTICE AGAIN BTN *************************************//
+
+practiceAgainBtn.addEventListener("click", () => {
+    practiceAgainBtn.classList.add("practice-again-hide");
+    practiceAgainBtn.classList.remove("practice-again-show");
+
+    modespell.classList.remove("mode-spell-hide");
+    spellCountDisplay.classList.remove("spell-count-hide");
+    spellDescription.classList.remove("spell-description-hide");
+
+    orbcontainer.classList.remove("orb-container-hide");
+    invokerspellscontainer.classList.remove("invoker-spells-hide");
+
+    orbs = [];
+
+    orb1.src = noorb;
+    orb2.src = noorb;
+    orb3.src = noorb;
+
+    spell1.src = nospell;
+    spell2.src = nospell;
+
+    spells = [];
+
+    startpracticeButton.click();
+});
+
 
 //**************************************** RESTART BTN ****************************************//
 
@@ -238,7 +267,6 @@ restartbtn.addEventListener('click', () => {
     
     spells = [];
 });
-
 
 //************************************* ORBS & SPELL LOGIC *************************************//
 
@@ -568,4 +596,10 @@ function classicFinished() {
     
     orbcontainer.classList.add("orb-container-hide")
     invokerspellscontainer.classList.add("invoker-spells-hide")
+
+    restartbtn.classList.remove("restart-show");
+    restartbtn.classList.add("restart-hide");
+
+    practiceAgainBtn.classList.remove("practice-again-hide");
+    practiceAgainBtn.classList.add("practice-again-show");
 }
