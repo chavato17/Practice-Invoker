@@ -51,6 +51,9 @@ let spell1 = document.getElementById('spell1');
 let spell2 = document.getElementById('spell2');
 
 let modespell = document.getElementById('mode-spell');
+let badge = document.getElementById("badge");
+let badgespan = document.getElementById("badge-span");
+let badgespanP = document.getElementById("badge-span-p")
 
 let quaskeybtn = document.getElementById('quaskeybtn');
 let wexkeybtn = document.getElementById('wexkeybtn');
@@ -135,8 +138,8 @@ let orbs = [];
     let exort = 'orbs/exort.jpg';
 
     let nospell = 'spells/no-spell.webp';
-
     let noorb = 'orbs/no-orb.webp'
+
     let coldsnap = 'spells/cold-snap.webp';
     let ghostwalk = 'spells/ghost-walk.webp';
     let icewall = 'spells/ice-wall.webp';
@@ -148,6 +151,12 @@ let orbs = [];
     let chaosmeteor = 'spells/chaos-meteor.webp';
     let deafeningblast = 'spells/deafening-blast.webp';
 
+    let bronzebadge = 'badge/bronze.webp';
+    let silverbadge = 'badge/silver.webp';
+    let goldbadge = 'badge/gold.webp';
+    let platinumbadge = 'badge/platinum.webp';
+    let masterbadge = 'badge/master.webp';
+    let grandmasterbadge = 'badge/grandmaster.webp' ;
 
 // ENTER to START & RESTART
 
@@ -205,6 +214,11 @@ practiceAgainBtn.addEventListener("click", () => {
 
     orbcontainer.classList.remove("orb-container-hide");
     invokerspellscontainer.classList.remove("invoker-spells-hide");
+
+    badge.classList.add("badge-hide");
+    badge.classList.remove("badge-show");
+    badgespanP.classList.add("badge-span-hide");
+    badgespanP.classList.remove("badge-span-show");
 
     orbs = [];
 
@@ -426,6 +440,10 @@ document.addEventListener('keydown', (event) => {
         return;
     }
 
+    if (event.key === "Enter") {
+    return;
+    }
+
     let newKey = event.key.toUpperCase();
 
     if (selectedKeybind === "quas") {
@@ -452,6 +470,7 @@ document.addEventListener('keydown', (event) => {
         updateSpellKeybinds();
     }
 
+    event.preventDefault();
     closeModal();
 });
 
@@ -462,6 +481,7 @@ function closeModal() {
     }
 
     modal.classList.remove('modal-show');
+    document.activeElement.blur();
 }
 
 //******************************************* MODES *******************************************//
@@ -602,4 +622,41 @@ function classicFinished() {
 
     practiceAgainBtn.classList.remove("practice-again-hide");
     practiceAgainBtn.classList.add("practice-again-show");
+
+    badge.classList.remove("badge-hide");
+    badge.classList.add("badge-show");
+    badgespanP.classList.remove("badge-span-hide");
+    badgespanP.classList.add("badge-span-show");
+
+    if (seconds < 6) {
+        badge.src = grandmasterbadge;
+        badgespan.textContent = "Grandmaster";
+        badgespan.style.color = "#BA200D";
+    }
+    else if (seconds < 8) {
+        badge.src = masterbadge;
+        badgespan.textContent = "Master";
+        badgespan.style.color = "#8C5BA9";
+    }
+    else if (seconds < 12) {
+        badge.src = platinumbadge;
+        badgespan.textContent = "Platinum";
+        badgespan.style.color = "#4E6BE1";
+    }
+    else if (seconds < 15) {
+        badge.src = goldbadge;
+        badgespan.textContent = "Gold";
+        badgespan.style.color = "#ECD75C";
+    }
+    else if (seconds < 20) {
+        badge.src = silverbadge;
+        badgespan.textContent = "Silver";
+        badgespan.style.color = "#B4E1E6";
+    }
+    else {
+        badge.src = bronzebadge;
+        badgespan.textContent = "Bronze";
+        badgespan.style.color = "#AA632E";
+    }
+
 }
