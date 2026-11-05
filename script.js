@@ -182,80 +182,33 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-//**************************************** START BTN ****************************************//
 
-startpracticeButton.addEventListener('click', () => {
-    isRunning = true;
+//MAIN MENU INTERFACE **************
+function mainmenu(){
     
-    classicmode();
-    clockDisplay.classList.remove("clock-hide");
-    clockDisplay.classList.add("clock-show");
-    spellCountDisplay.classList.remove("spell-count-hide")
-    spellDescription.classList.remove("spell-description-hide")
-
-    startpracticeButton.classList.add("remove-startprac");
-    restartbtn.classList.remove("restart-hide");
-    restartbtn.classList.add("restart-show");
-
-    if (timerRef === null) {
-        timerRef = setInterval(stopwatchLogic, 10);
-    }
-});
-
-//************************************* PRACTICE AGAIN BTN *************************************//
-
-practiceAgainBtn.addEventListener("click", () => {
-    practiceAgainBtn.classList.add("practice-again-hide");
-    practiceAgainBtn.classList.remove("practice-again-show");
-
-    modespell.classList.remove("mode-spell-hide");
-    spellCountDisplay.classList.remove("spell-count-hide");
-    spellDescription.classList.remove("spell-description-hide");
-
-    orbcontainer.classList.remove("orb-container-hide");
-    invokerspellscontainer.classList.remove("invoker-spells-hide");
-
-    badge.classList.add("badge-hide");
-    badge.classList.remove("badge-show");
-    badgespanP.classList.add("badge-span-hide");
-    badgespanP.classList.remove("badge-span-show");
-
-    orbs = [];
-
-    orb1.src = noorb;
-    orb2.src = noorb;
-    orb3.src = noorb;
-
-    spell1.src = nospell;
-    spell2.src = nospell;
-
-    spells = [];
-
-    startpracticeButton.click();
-});
-
-
-//**************************************** RESTART BTN ****************************************//
-
-restartbtn.addEventListener('click', () => {
-
     isRunning = false;
+
     classicModeFinished = false;
-    restartbtn.classList.remove("restart-show");
-    restartbtn.classList.add("restart-hide");
-    startpracticeButton.classList.remove("remove-startprac");
-    modespell.src = "";
+
+
+    restartbtn.classList.remove("show");
+    restartbtn.classList.add("hide");
+    startpracticeButton.classList.remove("hide");
+    startpracticeButton.classList.add("show");
+    practiceAgainBtn.classList.remove("show");
+    practiceAgainBtn.classList.add("hide");
+    
 
     startpracticeButton.removeEventListener('click', () => {})
 
     // Reset the stopwatch
-    clockDisplay.classList.remove("clock-show");
-    clockDisplay.classList.add("clock-hide");
+    clockDisplay.classList.remove("show");
+    clockDisplay.classList.add("hide");
 
-    spellCountDisplay.classList.add("spell-count-hide")
-    spellDescription.classList.add("spell-description-hide")
-    orbcontainer.classList.remove("orb-container-hide")
-    invokerspellscontainer.classList.remove("invoker-spells-hide")
+    spellCountDisplay.classList.add("hide")
+    spellDescription.classList.add("hide")
+    orbcontainer.classList.remove("hide")
+    invokerspellscontainer.classList.remove("hide")
 
     clearInterval(timerRef);
     timerRef = null;
@@ -267,6 +220,7 @@ restartbtn.addEventListener('click', () => {
 
     // Reset orb array
     orbs = [];
+    spells = [];
 
     // Reset orb images
     orb1.src = noorb;
@@ -276,10 +230,85 @@ restartbtn.addEventListener('click', () => {
     // Reset spell image
     spell1.src = nospell;
     spell2.src = nospell; 
+
+    modespell.src = "";
+    modespell.classList.add("hide");
+}
+
+//ACTIVE INTERFACE **************
+function active() {
+    isRunning = true;
     
-    modespell.classList.add("mode-spell-hide");
+    classicmode();
+
+    clockDisplay.classList.remove("hide");
+    clockDisplay.classList.add("show");
+
+    spellCountDisplay.classList.remove("hide")
+    spellDescription.classList.remove("hide")
+
+    startpracticeButton.classList.add("hide");
+
+    restartbtn.classList.remove("hide");
+    restartbtn.classList.add("show");
+
+    if (timerRef === null) {
+        timerRef = setInterval(stopwatchLogic, 10);
+    }
+}
+
+function finished(){
+
+    classicCurrentSpell = null;
+    modespell.src = "";
+
+    modespell.classList.add('hide')
+    spellCountDisplay.classList.add("hide")
+    spellDescription.classList.add("hide")
     
-    spells = [];
+    orbcontainer.classList.add("hide")
+    invokerspellscontainer.classList.add("hide")
+
+    restartbtn.classList.remove("show");
+    restartbtn.classList.add("hide");
+    practiceAgainBtn.classList.remove("hide");
+    practiceAgainBtn.classList.add("show");
+
+    badge.classList.remove("hide");
+    badge.classList.add("show");
+    badgespanP.classList.remove("hide");
+    badgespanP.classList.add("show");
+}
+
+
+//**************************************** START BTN ****************************************//
+
+startpracticeButton.addEventListener('click', () => {
+    startpracticeButton.classList.add("hide");
+    startpracticeButton.classList.remove("show");
+    active();
+});
+
+//************************************* PRACTICE AGAIN BTN *************************************//
+
+practiceAgainBtn.addEventListener("click", () => {
+    practiceAgainBtn.classList.add("hide");
+    practiceAgainBtn.classList.remove("show");
+    
+    badge.classList.remove("show");
+    badge.classList.add("hide");
+    badgespanP.classList.remove("show");
+    badgespanP.classList.add("hide");
+    mainmenu();
+});
+
+
+//**************************************** RESTART BTN ****************************************//
+
+restartbtn.addEventListener('click', () => {
+    restartbtn.classList.add("hide");
+    restartbtn.classList.remove("show");
+    mainmenu();
 });
 
 //************************************* ORBS & SPELL LOGIC *************************************//
@@ -299,20 +328,28 @@ document.addEventListener('keydown', (event) => {
                 orbs.shift();
             }
 
-            orbs.push(key);
+            if (key === quaskeybind) {
+                orbs.push('Q');
+            }
+            else if (key === wexkeybind) {
+                orbs.push('W');
+            }
+            else if (key === exortkeybind) {
+                orbs.push('E');
+    }
 
             // Update orb images
-            if (orbs[0] === quaskeybind) orb1.src = quas;
-            if (orbs[0] === wexkeybind) orb1.src = wex;
-            if (orbs[0] === exortkeybind) orb1.src = exort;
+            if (orbs[0] === 'Q') orb1.src = quas;
+            if (orbs[0] === 'W') orb1.src = wex;
+            if (orbs[0] === 'E') orb1.src = exort;
 
-            if (orbs[1] === quaskeybind) orb2.src = quas;
-            if (orbs[1] === wexkeybind) orb2.src = wex;
-            if (orbs[1] === exortkeybind) orb2.src = exort;
+            if (orbs[1] === 'Q') orb2.src = quas;
+            if (orbs[1] === 'W') orb2.src = wex;
+            if (orbs[1] === 'E') orb2.src = exort;
 
-            if (orbs[2] === quaskeybind) orb3.src = quas;
-            if (orbs[2] === wexkeybind) orb3.src = wex;
-            if (orbs[2] === exortkeybind) orb3.src = exort;
+            if (orbs[2] === 'Q') orb3.src = quas;
+            if (orbs[2] === 'W') orb3.src = wex;
+            if (orbs[2] === 'E') orb3.src = exort;
         }
 
         
@@ -321,11 +358,7 @@ document.addEventListener('keydown', (event) => {
         
         if (key === invokekeybind && orbs.length === 3) {
 
-            let combo = orbs.map(orb => {
-                if (orb === quaskeybind) return 'Q';
-                if (orb === wexkeybind) return 'W';
-                if (orb === exortkeybind) return 'E';
-            }).sort().join('');
+            let combo = [...orbs].sort().join('');
             
             if (combo === 'QQQ') {
                 combovalue = coldsnap; // Cold Snap
@@ -365,7 +398,7 @@ document.addEventListener('keydown', (event) => {
                     spells.pop();
                 }
             }
-
+            console.log(orbs)
             spell1.src = spells[0] || nospell;
             spell2.src = spells[1] || nospell;
             classicCheckSpell(combovalue);
@@ -484,6 +517,7 @@ function closeModal() {
     document.activeElement.blur();
 }
 
+
 //******************************************* MODES *******************************************//
 
 //**************//
@@ -519,6 +553,7 @@ let classicSpellNames = {
 let classicIndex = 0;
 let classicCurrentSpell = null;
 let classicModeFinished = false;
+let classicModeActive = false;
 
 function classicmode() {
 
@@ -570,8 +605,8 @@ function classicNextSpell() {
 
     spellDescription.textContent = classicSpellNames[classicCurrentSpell];
 
-    modespell.classList.remove("mode-spell-hide");
-    spellDescription.classList.remove("spell-description-hide");
+    modespell.classList.remove("hide");
+    spellDescription.classList.remove("hide");
 
     spellCount.textContent = classicIndex + 1;
 }
@@ -593,6 +628,7 @@ function classicCheckSpell(invokedSpell) {
 
 
 function classicFinished() {
+    let totalSeconds = hours * 3600 + minutes * 60 + seconds + ms / 100;
 
     isRunning = false;
     classicModeActive = false;
@@ -601,54 +637,27 @@ function classicFinished() {
     clearInterval(timerRef);
     timerRef = null;
 
-    orb1.src = noorb;
-    orb2.src = noorb;
-    orb3.src = noorb;
-
-    spell1.src = nospell
-    spell2.src = nospell
-
-    classicCurrentSpell = null;
-    modespell.src = "";
-    modespell.classList.add('mode-spell-hide')
-    spellCountDisplay.classList.add("spell-count-hide")
-    spellDescription.classList.add("spell-description-hide")
-    
-    orbcontainer.classList.add("orb-container-hide")
-    invokerspellscontainer.classList.add("invoker-spells-hide")
-
-    restartbtn.classList.remove("restart-show");
-    restartbtn.classList.add("restart-hide");
-
-    practiceAgainBtn.classList.remove("practice-again-hide");
-    practiceAgainBtn.classList.add("practice-again-show");
-
-    badge.classList.remove("badge-hide");
-    badge.classList.add("badge-show");
-    badgespanP.classList.remove("badge-span-hide");
-    badgespanP.classList.add("badge-span-show");
-
-    if (seconds < 6) {
+    if (totalSeconds < 6) {
         badge.src = grandmasterbadge;
         badgespan.textContent = "Grandmaster";
         badgespan.style.color = "#BA200D";
     }
-    else if (seconds < 8) {
+    else if (totalSeconds < 8) {
         badge.src = masterbadge;
         badgespan.textContent = "Master";
         badgespan.style.color = "#8C5BA9";
     }
-    else if (seconds < 12) {
+    else if (totalSeconds < 12) {
         badge.src = platinumbadge;
         badgespan.textContent = "Platinum";
         badgespan.style.color = "#4E6BE1";
     }
-    else if (seconds < 15) {
+    else if (totalSeconds < 15) {
         badge.src = goldbadge;
         badgespan.textContent = "Gold";
         badgespan.style.color = "#ECD75C";
     }
-    else if (seconds < 20) {
+    else if (totalSeconds < 20) {
         badge.src = silverbadge;
         badgespan.textContent = "Silver";
         badgespan.style.color = "#B4E1E6";
@@ -659,4 +668,5 @@ function classicFinished() {
         badgespan.style.color = "#AA632E";
     }
 
+    finished();
 }

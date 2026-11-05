@@ -37,6 +37,9 @@ body{
     color: #E2E8F0;
 }
 
+.hide{display: none !important;}
+.show{display: block !important}
+
 hero{
     display: flex;
     align-items: center;
@@ -210,11 +213,6 @@ hero{
     font-family: var(--cinzel);
 }
 
-.spell-count-hide{display: none !important;}
-.spell-description-hide{display: none !important}
-.orb-container-hide{display: none !important}
-.invoker-spells-hide{display: none !important}
-
 .badge-cont{
     display: flex;
     align-items: center;
@@ -337,41 +335,11 @@ hero{
     outline-offset: 3px;
 }
 
-
-.clock-show{
-    display: block !important;
-}
-
-.clock-hide{
-    display: none !important;
-}
-
-.mode-spell-hide{
-    display: none !important;
-}
-
 #mode-spell{
     border: 2px solid #000;
     width: 100px;
     height: 100px;
 }
-
-.remove-startprac{
-    display: none !important;
-}
-
-.restart-hide{
-    display: none !important;
-}
-
-.restart-show{
-    display: block !important;
-}
-
-.badge-hide{display: none !important}
-.badge-show{display: block !important}
-.badge-span-hide{display: none !important}
-.badge-span-show{display: block !important}
 
 #practice-again{
     position: relative;
@@ -412,9 +380,6 @@ hero{
     outline: 2px solid #cfeecf;
     outline-offset: 3px;
 }
-
-.practice-again-hide{display: none !important;}
-.practice-again-show{display: block !important;}
 
 .hero-right{
     min-width: 260px;
