@@ -221,20 +221,29 @@ hero{
 }
 
 .badge-cont img{
-    margin: 8px 0;
     width: 120px;
+    margin: 8px 0;
 }
 
 .badge-cont p{
-    font-size: 18px;
+    font-size: 20px;
+    opacity: 0.6;
+    margin: 0;
     font-weight: bold;
     text-align: center;
     line-height: 1.4;
 }
 
 #badge-span{
-    font-size: 32px;
+    font-size: 20px;
+    font-weight: bold;
     font-family: var(--cinzel);
+}
+
+#final-time-display{
+    font-size: 40px;
+    margin: 8px 0 4px 0;
+    font-variant-numeric: tabular-nums;
 }
 
 #clock-display{
@@ -379,6 +388,19 @@ hero{
 #practice-again:focus-visible {
     outline: 2px solid #cfeecf;
     outline-offset: 3px;
+}
+
+.mode-select{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    font-family: var(--cinzel);
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(29, 35, 44, 0.88);
+    border: 1px solid rgba(160, 175, 195, 0.10);
+    justify-content: space-evenly;
+    gap: 4px;
 }
 
 .hero-right{

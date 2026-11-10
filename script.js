@@ -53,7 +53,10 @@ let spell2 = document.getElementById('spell2');
 let modespell = document.getElementById('mode-spell');
 let badge = document.getElementById("badge");
 let badgespan = document.getElementById("badge-span");
-let badgespanP = document.getElementById("badge-span-p")
+let badgeP = document.getElementById("badgeP");
+let finalTimeDisplay = document.getElementById("final-time-display");
+let timenumber = document.getElementById("timenumber");
+let timeletter = document.getElementById("timeletter");
 
 let quaskeybtn = document.getElementById('quaskeybtn');
 let wexkeybtn = document.getElementById('wexkeybtn');
@@ -257,6 +260,7 @@ function active() {
     }
 }
 
+//FINISHED INTERFACE **************
 function finished(){
 
     classicCurrentSpell = null;
@@ -274,10 +278,29 @@ function finished(){
     practiceAgainBtn.classList.remove("hide");
     practiceAgainBtn.classList.add("show");
 
+    badgeP.classList.remove("hide");
+    badgeP.classList.add("show");
     badge.classList.remove("hide");
     badge.classList.add("show");
-    badgespanP.classList.remove("hide");
-    badgespanP.classList.add("show");
+    badgespan.classList.remove("hide");
+    badgespan.classList.add("show");
+    finalTimeDisplay.classList.remove("hide");
+    finalTimeDisplay.classList.add("show");
+
+    clockDisplay.classList.remove("show");
+    clockDisplay.classList.add("hide");
+
+    timenumber.textContent = clockDisplay.textContent;
+
+    if (hours > 0) {
+        timeletter.textContent = "h";
+    }
+    else if (minutes > 0) {
+        timeletter.textContent = "m";
+    }
+    else {
+        timeletter.textContent = "s";
+    }
 }
 
 
@@ -294,11 +317,14 @@ startpracticeButton.addEventListener('click', () => {
 practiceAgainBtn.addEventListener("click", () => {
     practiceAgainBtn.classList.add("hide");
     practiceAgainBtn.classList.remove("show");
-    
+    badgeP.classList.remove("show");
+    badgeP.classList.add("hide");
     badge.classList.remove("show");
     badge.classList.add("hide");
-    badgespanP.classList.remove("show");
-    badgespanP.classList.add("hide");
+    badgespan.classList.remove("show");
+    badgespan.classList.add("hide");
+    finalTimeDisplay.classList.add("hide");
+    finalTimeDisplay.classList.remove("show");
     mainmenu();
 });
 
@@ -336,7 +362,7 @@ document.addEventListener('keydown', (event) => {
             }
             else if (key === exortkeybind) {
                 orbs.push('E');
-    }
+            }
 
             // Update orb images
             if (orbs[0] === 'Q') orb1.src = quas;
