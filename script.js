@@ -696,3 +696,52 @@ function classicFinished() {
 
     finished();
 }
+
+
+
+
+
+ const dropdown = document.getElementById('modeDropdown');
+  const trigger  = document.getElementById('modeTrigger');
+  const triggerText = document.getElementById('modeTriggerText');
+  const radios   = [...dropdown.querySelectorAll('input[name="mode"]')];
+ 
+  function labelOf(radio) {
+    return radio.parentElement.querySelector('.mode-key-text').textContent;
+  }
+ 
+  function openMenu() {
+    dropdown.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+    // move focus to the selected option so arrow keys work right away
+    (radios.find(r => r.checked) || radios[0]).focus();
+  }
+ 
+  function closeMenu(returnFocus) {
+    dropdown.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+    if (returnFocus) trigger.focus();
+  }
+ 
+  trigger.addEventListener('click', () => {
+    dropdown.classList.contains('open') ? closeMenu(false) : openMenu();
+  });
+ 
+  // update the trigger text whenever the selection changes
+  radios.forEach(r => {
+    r.addEventListener('change', () => { triggerText.textContent = labelOf(r); });
+    // close after a mouse/touch pick (detail > 0); arrow-key picks keep it open
+    r.addEventListener('click', e => { if (e.detail > 0) closeMenu(true); });
+  });
+ 
+  // Escape / Enter close the menu, click outside closes it
+  dropdown.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu(true);
+    if (e.key === 'Enter' && dropdown.classList.contains('open') && e.target !== trigger) closeMenu(true);
+  });
+  document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) closeMenu(false);
+  });
+ 
+  // current value anywhere in your code:
+  // document.querySelector('input[name="mode"]:checked').value  -> "0" | "1" | "2"

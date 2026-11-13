@@ -50,25 +50,51 @@
                 <img id="spell2" src="spells/no-spell.webp" alt="">
                 <img class="skills-down" src="orbs/invoke.webp" alt="">
             </div>
-            <div class="mode-select">
-                <div>
-                    <input type="radio" id="mode1" name="mode" value="mode1" checked>
-                    <label for="mode1">Classic (10 spells)</label>
-                </div>
-                <div>
-                    <input type="radio" id="mode2" name="mode" value="mode2">
-                    <label for="mode2">Endless</label>
-                </div>
-                <div>
-                    <input type="radio" id="mode3" name="mode" value="mode3">
-                    <label for="mode3">Spell per minute</label>
-                </div>
-            </div>
+
             <div class="play-button-cont">
                 <button id="start-practice">Start Practice</button>
                 <button id="restart-btn" class="hide">Restart</button>
                 <button id="practice-again" class="hide">Practice Again</button>
             </div>
+
+
+            <div class="mode-selector">
+                <div class="mode-dropdown" id="modeDropdown">
+                
+                    <div class="mode-trigger" id="modeTrigger" role="button" tabindex="0"
+                            aria-haspopup="true" aria-expanded="false" aria-controls="modeMenu">
+                        <span class="game-mode-text">Game Mode: </span>
+                        <span class="mode-key-text" id="modeTriggerText" style="color: #32d14c">Classic (10 spells)</span>
+                    <svg class="mode-chevron" viewBox="0 0 10 10" aria-hidden="true">
+                        <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </div>
+                
+                    <div class="mode-tray" id="modeMenu" role="radiogroup" aria-label="Practice mode">
+                        <div class="mode-slot">
+                            <label>
+                            <input type="radio" name="mode" value="0" checked>
+                            <span class="mode-key"><span class="mode-box"></span><span class="mode-key-text">Classic (10 spells)</span></span>
+                            </label>
+                        </div>
+                        <div class="mode-slot">
+                            <label>
+                            <input type="radio" name="mode" value="1">
+                            <span class="mode-key"><span class="mode-box"></span><span class="mode-key-text">Endless</span></span>
+                            </label>
+                        </div>
+                        <div class="mode-slot">
+                            <label>
+                            <input type="radio" name="mode" value="2">
+                            <span class="mode-key"><span class="mode-box"></span><span class="mode-key-text">Spell per minute</span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="hero-right">
             <h2>SPELLS</h2>
